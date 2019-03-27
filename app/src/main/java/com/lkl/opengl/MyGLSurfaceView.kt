@@ -34,6 +34,14 @@ class MyGLSurfaceView(context: Context, attributeSet: AttributeSet?) : GLSurface
     }
 
     /**
+     * 设置显示方向
+     * @param degrees 显示旋转角度（逆时针），有效值是（0, 90, 180, and 270.）
+     */
+    fun setDisplayOrientation(degrees: Int) {
+        renderer.setDisplayOrientation(degrees)
+    }
+
+    /**
      * 设置渲染的YUV数据的宽高
      * @param width 宽度
      * @param height 高度

@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity(), Camera.PreviewCallback {
 
     private lateinit var mSurfaceHolder: SurfaceHolder
 
+    private var mDegrees = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -40,6 +42,12 @@ class MainActivity : AppCompatActivity(), Camera.PreviewCallback {
                 initCamera()
             }
         })
+
+        rotateBtn.setOnClickListener {
+            mDegrees += 90
+            mDegrees %= 360
+            openGlSurface?.setDisplayOrientation(mDegrees)
+        }
     }
 
     private fun initCamera() {

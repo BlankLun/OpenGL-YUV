@@ -71,6 +71,9 @@ class MyGLRenderer : GLSurfaceView.Renderer {
         // in the onDrawFrame() method
         Matrix.frustumM(projectionMatrix, 0, -ratio, ratio, -1f, 1f, 3f, 7f)
 
+        // Set the camera position (View matrix)
+        Matrix.setLookAtM(viewMatrix, 0, 0f, 0f, -3f, 0f, 0f, 0f, 1.0f, 0.0f, 0.0f)
+
         if (mVideoWidth > 0 && mVideoHeight > 0) {
             createBuffers(mVideoWidth, mVideoHeight)
         }
@@ -94,9 +97,6 @@ class MyGLRenderer : GLSurfaceView.Renderer {
                 // Redraw background color
                 GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT)
 
-                // Set the camera position (View matrix)
-                Matrix.setLookAtM(viewMatrix, 0, 0f, 0f, -3f, 0f, 0f, 0f, 1f, 0.0f, 0.0f)
-
                 // Calculate the projection and view transformation
                 Matrix.multiplyMM(vPMatrix, 0, projectionMatrix, 0, viewMatrix, 0)
 
@@ -106,6 +106,25 @@ class MyGLRenderer : GLSurfaceView.Renderer {
                     Log.w(TAG, e.message)
                 }
             }
+        }
+    }
+
+    /**
+     * 设置显示方向
+     * @param degrees 显示旋转角度（逆时针），有效值是（0, 90, 180, and 270.）
+     */
+    fun setDisplayOrientation(degrees: Int) {
+        // Set the camera position (View matrix)
+        if (degrees == 0) {
+            Matrix.setLookAtM(viewMatrix, 0, 0f, 0f, -3f, 0f, 0f, 0f, 1.0f, 0.0f, 0.0f)
+        } else if (degrees == 90) {
+            Matrix.setLookAtM(viewMatrix, 0, 0f, 0f, -3f, 0f, 0f, 0f, 0.0f, 1.0f, 0.0f)
+        } else if (degrees == 180) {
+            Matrix.setLookAtM(viewMatrix, 0, 0f, 0f, -3f, 0f, 0f, 0f, -1.0f, 0.0f, 0.0f)
+        } else if (degrees == 270) {
+            Matrix.setLookAtM(viewMatrix, 0, 0f, 0f, -3f, 0f, 0f, 0f, 0.0f, -1.0f, 0.0f)
+        } else {
+            Log.e(TAG, "degrees pram must be in (0, 90, 180, 270) ")
         }
     }
 

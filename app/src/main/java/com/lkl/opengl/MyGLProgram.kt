@@ -69,6 +69,11 @@ class MyGLProgram {
         checkGlError("glGenTextures")
     }
 
+    /**
+     * 绘制纹理贴图
+     * @param mvpMatrix 顶点坐标变换矩阵
+     * @param type YUV数据格式类型
+     */
     fun drawTexture(mvpMatrix: FloatArray, type: Int) {
 
         GLES20.glUseProgram(mProgram)
@@ -236,7 +241,7 @@ class MyGLProgram {
 
     /**
      * 检查GL操作是否有error
-     * @param op 当前检查前所做的操作
+     * @param op 检查当前所做的操作
      */
     private fun checkGlError(op: String) {
         var error: Int = GLES20.glGetError()
