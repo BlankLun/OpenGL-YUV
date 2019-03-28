@@ -5,10 +5,9 @@ import android.hardware.Camera
 import android.os.Bundle
 import android.util.Log
 import android.view.SurfaceHolder
-import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), Camera.PreviewCallback {
+class MainActivity : BaseActivity(), Camera.PreviewCallback {
     companion object {
         private const val TAG = "MainActivity"
     }
