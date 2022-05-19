@@ -15,7 +15,7 @@ class MainActivity : BaseActivity(), Camera.PreviewCallback {
     private var mCamera: Camera? = null
     // 设定默认的预览宽高
     private var mPreviewWidth = 1920
-    private var mPreviewHeight = 1280
+    private var mPreviewHeight = 1080
 
     private var mBuffer: ByteArray? = null
 
