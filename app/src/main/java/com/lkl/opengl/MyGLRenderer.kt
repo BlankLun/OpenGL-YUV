@@ -19,12 +19,16 @@ class MyGLRenderer : GLSurfaceView.Renderer {
     }
 
     private lateinit var mProgram: MyGLProgram
+
     // GLSurfaceView宽度
     private var mScreenWidth: Int = 0
+
     // GLSurfaceView高度
     private var mScreenHeight: Int = 0
+
     // 预览YUV数据宽度
     private var mVideoWidth: Int = 0
+
     // 预览YUV数据高度
     private var mVideoHeight: Int = 0
 
@@ -35,15 +39,19 @@ class MyGLRenderer : GLSurfaceView.Renderer {
 
     // y分量数据
     private var y: ByteBuffer = ByteBuffer.allocate(0)
+
     // u分量数据
     private var u: ByteBuffer = ByteBuffer.allocate(0)
+
     // v分量数据
     private var v: ByteBuffer = ByteBuffer.allocate(0)
+
     // uv分量数据
     private var uv: ByteBuffer = ByteBuffer.allocate(0)
 
     // YUV数据格式 0 -> I420  1 -> NV12  2 -> NV21
     private var type: Int = 0
+
     // 标识GLSurfaceView是否准备好
     private var hasVisibility = false
 
@@ -63,13 +71,9 @@ class MyGLRenderer : GLSurfaceView.Renderer {
         mScreenWidth = width
         mScreenHeight = height
 
-        mScreenWidth = width
-        mScreenHeight = height
-        val ratio: Float = width.toFloat() / height.toFloat()
-
         // this projection matrix is applied to object coordinates
         // in the onDrawFrame() method
-        Matrix.frustumM(projectionMatrix, 0, -ratio, ratio, -1f, 1f, 3f, 7f)
+        Matrix.frustumM(projectionMatrix, 0, -1f, 1f, -1f, 1f, 3f, 7f)
 
         // Set the camera position (View matrix)
         Matrix.setLookAtM(viewMatrix, 0, 0f, 0f, -3f, 0f, 0f, 0f, 1.0f, 0.0f, 0.0f)
@@ -162,8 +166,9 @@ class MyGLRenderer : GLSurfaceView.Renderer {
     private fun createBuffers(width: Int, height: Int) {
         if (mScreenWidth > 0 && mScreenHeight > 0) {
             val f1 = mScreenHeight.toFloat() / mScreenWidth.toFloat()
-            val f2 = height.toFloat() / width.toFloat()
-            if (f1 == f2) {
+            val f2 = width.toFloat() / height.toFloat()
+//            val f2 = height.toFloat() / width.toFloat()
+            if (true) {
                 mProgram.createBuffers(MyGLProgram.squareVertices)
             } else if (f1 < f2) {
                 val widthScale = f1 / f2
